@@ -67,7 +67,9 @@ by using maven to artifact your aplication .
 15)mv student-2.2-SNAPSHOT.war /mnt/tomcat/webapps/student.war
 
 16)then hit ip:8080/student.war
+
 ========================================================================================================
+
 #**Tomcat deploy Dockerfile on centos 
 
 FROM amazonlinux
@@ -78,8 +80,9 @@ RUN mv apache-tomcat-9.0.90 /mnt/tomcat/
 RUN chmod 770 /mnt/tomcat/bin/catalina.sh
 CMD ["/mnt/tomcat/bin/catalina.sh", "run"]
 EXPOSE 8080                                  			
+
 =====================================================================================================
-##Deploy tomcat with student-ui app (need student-ui code from git repo)           
+#Deploy tomcat with student-ui app (need student-ui code from git repo)           
 
 FROM amazonlinux
 LABEL maintainer="Abhijit Ramteke<abhijitramteke345@gmail.com>"
