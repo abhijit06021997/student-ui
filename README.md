@@ -1,23 +1,42 @@
 #***tomcat deploy and  student_ ui  application requrnment
 
 1.on ubuntu
+
 #search pkg for java by $apt-cache search openjdk 
+
 #select and download suitable  11 version pkg
+
 2.install tomcat specified version like 11 on google $wget (pkg link)
+
 3.unzip it
+
 4.mv it $ mv (tomcat pkg) /mnt/pkg with rename in tomcat for understanding 
+
 5.give permision to the catalina.sh $ chmod 770 /mnt/tomcat/bin/catalina.sh
+
+
 6)and start it $./catalina.sh start  [after going bin dir ]  -or[/mnt/tomcat/bin/./catalina.sh start ]-->without going to the path
+
 7) hit port 8080 
 
 #NOw deploy student_ui aplication  [maven home dir ---/usr /share/maven
+
+
 by using maven to artifact your aplication .
+
+
 1)$apt install maven  -y
+
 2)git clone (student-ui) from particular git repo
+
 3)cd student-ui
+
 4)$ mvn clean package 
+
 5)cd target
+
 6)mv student-2.2-SNAPSHOT.war /mnt/tomcat/webapps/student.war
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #***TOmcat deployment on centos linux 
 
@@ -42,12 +61,19 @@ by using maven to artifact your aplication .
 #**Tomcat deploy Dockerfile on centos 
 
 FROM amazonlinux
+
 RUN yum update -y && yum install -y java-17-amazon-corretto.x86_64 -y && yum install -y unzip && yum install -y wget
+
 RUN wget https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.1/bin/apache-tomcat-11.0.1.zip
+
 RUN unzip apache-tomcat-11.0.1
+
 RUN mv apache-tomcat-9.0.90 /mnt/tomcat/
+
 RUN chmod 770 /mnt/tomcat/bin/catalina.sh
+
 CMD ["/mnt/tomcat/bin/catalina.sh", "run"]
+
 EXPOSE 8080                                  			
 
 =====================================================================================================
@@ -55,17 +81,27 @@ EXPOSE 8080
 # Deploy tomcat with student-ui app (need student-ui code from git repo)           
 
 FROM amazonlinux
+
 LABEL maintainer="Abhijit Ramteke<abhijitramteke345@gmail.com>"
+
 RUN yum update -y && yum install -y java-17-amazon-corretto.x86_64 -y && yum install -y unzip && yum install -y wget
+
 RUN wget https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.1/bin/apache-tomcat-11.0.1.zip
-RUN unzip apache-tomcat-11.0.1
+
 RUN mv apache-tomcat-10.1.28 /mnt/tomcat/
+
 RUN chmod 770 /mnt/tomcat/bin/catalina.sh
+
 COPY . /app
+
 WORKDIR /app
+
 RUN mvn clean package
+
 RUN cp target/*.war /mnt/tomcat/webapps/student.war
+
 EXPOSE 8080
+
 CMD ["/mnt/tomcat/bin/catalina.sh", "run"]				#hit on port/student     for application access
 
 =======================================================================================================
